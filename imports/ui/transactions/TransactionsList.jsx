@@ -48,7 +48,8 @@ export default class Transactions extends Component{
     componentDidUpdate(prevProps){
         if (this.props.location.pathname != prevProps.location.pathname){
             this.setState({
-                sidebarOpen: (this.props.location.pathname.split("/transactions/").length == 2)
+                sidebarOpen: (this.props.location.pathname.split("/transactions/").length == 2),
+                sidebarOpenStarname: (this.props.location.pathname.split("/starname/").length == 2),
             })
         }
     }
@@ -127,7 +128,7 @@ export default class Transactions extends Component{
                     open={this.state.sidebarOpenStarname}
                     onSetOpen={this.onSetSidebarOpenStarname}
                     styles={{ sidebar: {
-                        background: "black", // dmjp
+                        background: "blue", // dmjp
                         position: "fixed",
                         width: '85%',
                         zIndex: 4

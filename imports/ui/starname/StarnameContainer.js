@@ -7,6 +7,5 @@ export default StarnameContainer = withTracker(props => {
 
     return {
         starname,
-        loading: false,
     };
 })(Starname);
