@@ -9,18 +9,18 @@ const T = i18n.createComponent();
 
 
 export default class Starname extends Component {
-    constructor(props){
-        super(props);
+    constructor( props ) {
+        super( props );
         this.state = {
             infoed: null, // domainInfo object
-            loading: props.loading,
+            loading: true,
             resolved: null, // resolved starname object
             starname: props.starname,
         }
     }
 
 
-    async fetchDetails(){
+    async fetchDetails() {
         const domain = this.state.starname.split( "*" );
         const rpc = Meteor.settings.public.urlRest;
         const responses = await Promise.all( [
@@ -30,44 +30,35 @@ export default class Starname extends Component {
         const resolved = await responses[0].json();
         const infoed = await responses[1].json();
 
-        this.setState({
+        this.setState( {
             infoed: infoed.result || infoed.error,
             loading: false,
             resolved: resolved.result || resolved.error,
-        });
+        } );
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         this.fetchDetails();
     }
 
 
-    componentDidUpdate(prevProps){
-        if (this.props.match.params.starname !== prevProps.match.params.starname){
-            this.setState({
+    componentDidUpdate( prevProps ) {
+        if ( this.props.match.params.starname !== prevProps.match.params.starname ) {
+            this.setState( {
                 infoed: null,
                 loading: true,
                 resolved: null,
                 starname: this.props.match.params.starname,
             }, () => {
                 this.fetchDetails();
-            })
+            } )
         }
     }
 
 
-    renderShareLink() { // dmjp
-        let primaryLink = `/account/${this.state.starname}`
-        let otherLinks = [
-            {label: 'Transfer', url: `${primaryLink}/send`}
-        ]
-        return <LinkIcon link={primaryLink} otherLinks={otherLinks} />
-    }
-
-
-    render(){
-        if (this.state.loading) {
+    render() {
+        if ( this.state.loading ) {
             return <Container id="starname">
                 <Spinner type="grow" color="primary" />
             </Container>
@@ -96,20 +87,19 @@ export default class Starname extends Component {
                                 <Col md={4} className="label"><T>starname.broker</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto address">{info.broker.length > 0 ? <Account address={info.broker} /> : ""}</Col>
                                 <Col md={4} className="label"><T>starname.validUntil</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto">{new Date(1000 * data.valid_until).toLocaleString()}</Col>
+                                <Col md={8} className="value text-nowrap overflow-auto">{new Date( 1000 * data.valid_until ).toLocaleString()}</Col>
                                 <Col md={4} className="label"><T>starname.certificates</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.certificates ? data.certificates.length : 0}</Col>
                                 <Col md={4} className="label"><T>starname.metadata</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.metadata_uri}</Col>
                                 <Col md={12} className="label"><T>starname.resources</T></Col>
-                                {data.resources && data.resources.sort((a,b) => a.uri < b.uri).map((resource, i) => {
+                                {data.resources && data.resources.sort( ( a, b ) => a.uri < b.uri ).map( ( resource, i ) => {
                                     return <Fragment key={i}><Col md={4} className="label">{resource.uri}</Col><Col md={8} className="value text-nowrap overflow-auto">{resource.resource}</Col></Fragment>
-                                })}
+                                } )}
                             </Row>
                         </CardBody>
                     </Card>
-                    {info &&
-                    <Card>
+                    {info && <Card>
                         <div className="card-header"><T>starname.domain</T></div>
                         <CardBody>
                             <Row>
@@ -122,17 +112,13 @@ export default class Starname extends Component {
                                 <Col md={4} className="label"><T>starname.broker</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto address">{info.broker.length > 0 ? <Account address={info.broker} /> : ""}</Col>
                                 <Col md={4} className="label"><T>starname.validUntil</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto">{new Date(1000 * info.valid_until).toLocaleString()}</Col>
+                                <Col md={8} className="value text-nowrap overflow-auto">{new Date( 1000 * info.valid_until ).toLocaleString()}</Col>
                             </Row>
                         </CardBody>
-                    </Card>
-            }
-                    {/* dmjp(tx.tx.value.msg && tx.tx.value.msg.length >0)?tx.tx.value.msg.map((msg,i) => {
-                        return <Card body key={i}><Activities msg={msg} invalid={(!!tx.code)} events={(tx.logs&&tx.logs[i])?tx.logs[i].events:null} denom={this.denom}/></Card>
-                    }):''*/}
+                    </Card>}
                 </Container>
             } else {
-                return <Container id="starname"><div><T>transactions.noTxFound</T></div></Container>
+                return <Container id="starname"><div><T>starname.noStarnameFound</T></div></Container>
             }
         }
     }

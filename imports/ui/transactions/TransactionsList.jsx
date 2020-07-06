@@ -9,7 +9,7 @@ import Sidebar from "react-sidebar";
 import ChainStates from '../components/ChainStatesContainer.js'
 import { Helmet } from 'react-helmet';
 import i18n from 'meteor/universe:i18n';
-import StarnameContainer from '../starname/StarnameContainer.js';
+import StarnameContainer from './StarnameContainer.js';
 import MsgContainer from './MsgContainer.js';
 
 const T = i18n.createComponent();
