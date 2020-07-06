@@ -86,6 +86,7 @@ class App extends Component {
                                 <Route path="/blocks" component={BlocksTable} />
                                 <Route path="/transactions" component={Transactions} />
                                 <Route path="/starname" component={Transactions} />
+                                <Route path="/msg" component={Transactions} />
                                 <Route path="/account/:address" render={(props)=><Account {...props} />} />
                                 <Route path="/validators" exact component={Validators} />
                                 <Route path="/validators/inactive" render={(props) => <Validators {...props} inactive={true} />} />

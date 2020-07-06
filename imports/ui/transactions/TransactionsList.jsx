@@ -10,6 +10,7 @@ import ChainStates from '../components/ChainStatesContainer.js'
 import { Helmet } from 'react-helmet';
 import i18n from 'meteor/universe:i18n';
 import StarnameContainer from '../starname/StarnameContainer.js';
+import MsgContainer from './MsgContainer.js';
 
 const T = i18n.createComponent();
 
@@ -27,10 +28,12 @@ export default class Transactions extends Component{
             loadmore: false,
             sidebarOpen: (props.location.pathname.split("/transactions/").length == 2),
             sidebarOpenStarname: (props.location.pathname.split("/starname/").length == 2),
+            sidebarOpenMsg: (props.location.pathname.split("/msg/").length == 2),
         }
 
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
         this.onSetSidebarOpenStarname = this.onSetSidebarOpenStarname.bind(this);
+        this.onSetSidebarOpenMsg = this.onSetSidebarOpenMsg.bind(this);
     }
 
     isBottom(el) {
@@ -50,6 +53,7 @@ export default class Transactions extends Component{
             this.setState({
                 sidebarOpen: (this.props.location.pathname.split("/transactions/").length == 2),
                 sidebarOpenStarname: (this.props.location.pathname.split("/starname/").length == 2),
+                sidebarOpenMsg: (this.props.location.pathname.split("/msg/").length == 2),
             })
         }
     }
@@ -97,6 +101,18 @@ export default class Transactions extends Component{
         });
     }
 
+    onSetSidebarOpenMsg(open) {
+      // console.log(open);
+      this.setState({ sidebarOpenMsg: open }, (error, result) =>{
+          let timer = Meteor.setTimeout(() => {
+              if (!open){
+                  this.props.history.push('/msg');
+              }
+              Meteor.clearTimeout(timer);
+          },500)
+      });
+  }
+
     render(){
         return <div id="transactions">
             <Helmet>
@@ -128,7 +144,22 @@ export default class Transactions extends Component{
                     open={this.state.sidebarOpenStarname}
                     onSetOpen={this.onSetSidebarOpenStarname}
                     styles={{ sidebar: {
-                        background: "blue", // dmjp
+                        background: "white",
+                        position: "fixed",
+                        width: '85%',
+                        zIndex: 4
+                    },overlay: {
+                        zIndex: 3
+                    } }}
+                >
+                </Sidebar>}>
+                </Route>
+                <Route path="/msg/:msgJson" render={(props)=> <Sidebar
+                    sidebar={<MsgContainer {...props} />}
+                    open={this.state.sidebarOpenMsg}
+                    onSetOpen={this.onSetSidebarOpenMsg}
+                    styles={{ sidebar: {
+                        background: "white",
                         position: "fixed",
                         width: '85%',
                         zIndex: 4
