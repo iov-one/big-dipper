@@ -75,7 +75,7 @@ export default class Starname extends Component {
                         <title>Starname {this.props.starname} On The IOV Name Service</title>
                         <meta name="description" content={"Details of starname " + this.props.starname} />
                     </Helmet>
-                    <h4><T>starname.starname</T></h4>
+                    <h4><T>starname.starname</T> ✰</h4>
                     <Card>
                         <CardBody>
                             <Row>
