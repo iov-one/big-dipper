@@ -13,7 +13,8 @@ import CryptoJS from "crypto-js"
 // TODO: discuss TIMEOUT value
 const INTERACTION_TIMEOUT = 10000
 const REQUIRED_COSMOS_APP_VERSION = "2.16.1"
-const DEFAULT_DENOM = Meteor.settings.public.bondDenom; // fragile
+const CHAIN_ID = Meteor.settings.public.chainId;
+const DEFAULT_DENOM = CHAIN_ID.toLowerCase().indexOf( "mainnet" ) != -1 ? "uiov" : "uvoi";
 const DEFAULT_GAS = 200000;
 export const DEFAULT_GAS_PRICE = Meteor.settings.public.gasPrice;
 export const DEFAULT_MEMO = 'Sent via Big Dipper'
@@ -106,7 +107,7 @@ export class Ledger {
         const { appName } = response
 
         if (appName.toLowerCase() !== `iov`) {
-            throw new Error(`Close ${appName} and open the IOV${DEFAULT_DENOM.toLowerCase().indexOf( "iov" ) != -1 ? "" : "TEST"} app`)
+            throw new Error(`Close ${appName} and open the IOV${CHAIN_ID.toLowerCase().indexOf( "mainnet" ) != -1 ? "" : "TEST"} app`)
         }
     }
     async getPubKey() {
