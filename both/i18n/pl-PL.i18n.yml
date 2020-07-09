@@ -51,7 +51,7 @@ chainStates:
     inflation: 'Inflacja'
     communityPool: 'Zasoby Społeczności'
 chainStatus:
-    startMessage: 'Łańcuch bloków danych rozpocznie działanie za ' 
+    startMessage: 'Łańcuch bloków danych rozpocznie działanie za '
     topWarning: 'Wygląda na to że, łańcuch bloków danych zatrzymał się na <em>{$time}</em>! Odśwież stronę i nakarm mnie nowymi blokami 😭!'
     latestHeight: 'Ostatnia wysokość bloku'
     averageBlockTime: 'Średni Czas Bloku'
@@ -132,7 +132,7 @@ transactions:
     txHash: 'Tx Hash'
     valid: 'Ważna'
     fee: 'Opłata'
-    noFee: 'Bezpłatnie' 
+    noFee: 'Bezpłatnie'
     gasUsedWanted: 'Gaz (użyty/ wymagany)'
     noTxFound: 'Nie znaleziono podanej transakcji.'
     noValidatorTxsFound: 'Nie znaleziono żadnej transakcji dla podanego Walidatora'
@@ -200,7 +200,7 @@ accounts:
     signInText: 'Zalogowany jako '
     toLoginAs: 'Aby zalogować się jako '
     signInWithLedger: 'Zaloguj się z Ledgerem'
-    signInWarning: 'Upewnij się, że Twój Ledger jest podłączony do komputera oraz aplikacja <strong class="text-primary">Cosmos App 1.5.0 lub nowsza </strong> jest uruchomiona.'
+    signInWarning: 'Upewnij się, że Twój Ledger jest podłączony do komputera oraz aplikacja <strong class="text-primary">IOV App 2.16.1 lub nowsza </strong> jest uruchomiona.'
     pleaseAccept: 'zaakceptuj połączenie na Twoim Ledgerze.'
     noRewards: 'Brak Nagród'
 activities:
