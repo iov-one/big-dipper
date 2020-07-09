@@ -1,31 +1,29 @@
 // https://github.com/zondax/cosmos-delegation-js/
 // https://github.com/cosmos/ledger-cosmos-js/blob/master/src/index.js
 import 'babel-polyfill';
-import Cosmos from "@lunie/cosmos-js"
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 import CosmosApp from "ledger-cosmos-js"
 import { signatureImport } from "secp256k1"
 import semver from "semver"
 import bech32 from "bech32";
-import secp256k1 from "secp256k1";
 import sha256 from "crypto-js/sha256"
 import ripemd160 from "crypto-js/ripemd160"
 import CryptoJS from "crypto-js"
 
 // TODO: discuss TIMEOUT value
 const INTERACTION_TIMEOUT = 10000
-const REQUIRED_COSMOS_APP_VERSION = "1.5.0"
-const DEFAULT_DENOM = 'uatom';
+const REQUIRED_COSMOS_APP_VERSION = "2.16.1"
+const DEFAULT_DENOM = Meteor.settings.public.bondDenom; // fragile
 const DEFAULT_GAS = 200000;
-export const DEFAULT_GAS_PRICE = 0.025;
+export const DEFAULT_GAS_PRICE = Meteor.settings.public.gasPrice;
 export const DEFAULT_MEMO = 'Sent via Big Dipper'
 
 /*
 HD wallet derivation path (BIP44)
-DerivationPath{44, 118, account, 0, index}
+DerivationPath{44, 234, account, 0, index}
 */
 
-const HDPATH = [44, 118, 0, 0, 0]
+const HDPATH = [44, 234, 0, 0, 0]
 const BECH32PREFIX = Meteor.settings.public.bech32PrefixAccAddr
 
 function bech32ify(address, prefix) {
@@ -68,7 +66,7 @@ export class Ledger {
         const version = await this.getCosmosAppVersion()
 
         if (!semver.gte(version, REQUIRED_COSMOS_APP_VERSION)) {
-            const msg = `Outdated version: Please update Ledger Cosmos App to the latest version.`
+            const msg = `Outdated version: Please update Ledger IOV App to the latest version.`
             throw new Error(msg)
         }
 
@@ -93,6 +91,7 @@ export class Ledger {
 
         const response = await this.cosmosApp.getVersion()
         this.checkLedgerErrors(response)
+        // eslint-disable-next-line camelcase
         const { major, minor, patch, test_mode } = response
         checkAppMode(this.testModeAllowed, test_mode)
         const version = versionString({ major, minor, patch })
@@ -106,8 +105,8 @@ export class Ledger {
         this.checkLedgerErrors(response)
         const { appName } = response
 
-        if (appName.toLowerCase() !== `cosmos`) {
-            throw new Error(`Close ${appName} and open the Cosmos app`)
+        if (appName.toLowerCase() !== `iov`) {
+            throw new Error(`Close ${appName} and open the IOV${DEFAULT_DENOM.toLowerCase().indexOf( "iov" ) != -1 ? "" : "TEST"} app`)
         }
     }
     async getPubKey() {
@@ -153,15 +152,18 @@ export class Ledger {
 
     /* istanbul ignore next: maps a bunch of errors */
     checkLedgerErrors(
+        // eslint-disable-next-line camelcase
         { error_message, device_locked },
         {
             timeoutMessag = "Connection timed out. Please try again.",
             rejectionMessage = "User rejected the transaction"
         } = {}
     ) {
+        // eslint-disable-next-line camelcase
         if (device_locked) {
             throw new Error(`Ledger's screensaver mode is on`)
         }
+        // eslint-disable-next-line camelcase
         switch (error_message) {
         case `U2F: Timeout`:
             throw new Error(timeoutMessag)
@@ -171,7 +173,7 @@ export class Ledger {
             // So we clean up here, and re-initialize this.cosmosApp next time when calling `connect`
             this.cosmosApp.transport.close()
             this.cosmosApp = undefined
-            throw new Error(`Cosmos app is not open`)
+            throw new Error(`IOV app is not open`)
         case `Command not allowed`:
             throw new Error(`Transaction rejected`)
         case `Transaction rejected`:
@@ -180,7 +182,7 @@ export class Ledger {
             throw new Error(`Ledger's screensaver mode is on`)
         case `Instruction not supported`:
             throw new Error(
-                `Your Cosmos Ledger App is not up to date. ` +
+                `Your IOV Ledger App is not up to date. ` +
                 `Please update to version ${REQUIRED_COSMOS_APP_VERSION}.`
             )
         case `No errors`:
@@ -465,7 +467,7 @@ function versionString({ major, minor, patch }) {
 export const checkAppMode = (testModeAllowed, testMode) => {
     if (testMode && !testModeAllowed) {
         throw new Error(
-            `DANGER: The Cosmos Ledger app is in test mode and shouldn't be used on mainnet!`
+            `DANGER: The IOV Ledger app is in test mode and shouldn't be used on mainnet!`
         )
     }
 }
