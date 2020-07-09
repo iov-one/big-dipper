@@ -59,7 +59,7 @@ export class Ledger {
         // check if the device is connected or on screensaver mode
         const response = await this.cosmosApp.publicKey(HDPATH)
         this.checkLedgerErrors(response, {
-            timeoutMessag: "Could not find a connected and unlocked Ledger device"
+            timeoutMessage: "Could not find a connected and unlocked Ledger device"
         })
     }
     async isReady() {
@@ -156,7 +156,7 @@ export class Ledger {
         // eslint-disable-next-line camelcase
         { error_message, device_locked },
         {
-            timeoutMessag = "Connection timed out. Please try again.",
+            timeoutMessage = "Connection timed out. Please try again.",
             rejectionMessage = "User rejected the transaction"
         } = {}
     ) {
@@ -167,7 +167,7 @@ export class Ledger {
         // eslint-disable-next-line camelcase
         switch (error_message) {
         case `U2F: Timeout`:
-            throw new Error(timeoutMessag)
+            throw new Error(timeoutMessage)
         case `Cosmos app does not seem to be open`:
             // hack:
             // It seems that when switching app in Ledger, WebUSB will disconnect, disabling further action.
