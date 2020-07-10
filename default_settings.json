@@ -1,6 +1,6 @@
 {
     "public":{
-        "chainName": "Cosmos Testnet",
+        "chainName": "IOV Testnet",
         "chainId": "{Chain ID}",
         "gtm": "{Add your Google Tag Manager ID here}",
         "slashingWindow": 10000,
@@ -21,13 +21,13 @@
                 "displayName": "ATOM",
                 "displayNamePlural": "ATOMS",
                 "fraction": 1000000
-            }, 
+            },
             {
                 "denom": "umuon",
                 "displayName": "MUON",
                 "displayNamePlural": "MUONS",
                 "fraction": 1000000
-            } 
+            }
         ],
         "gasPrice": 0.02,
         "coingeckoId": "cosmos"
@@ -53,5 +53,3 @@
         "delegationInterval": 900000
     }
 }
-
-
