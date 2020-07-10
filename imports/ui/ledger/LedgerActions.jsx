@@ -162,7 +162,8 @@ class LedgerButton extends Component {
             pubKey: localStorage.getItem(CURRENTUSERPUBKEY),
             memo: DEFAULT_MEMO
         };
-        this.ledger = new Ledger({testModeAllowed: false});
+        const CHAIN_ID = Meteor.settings.public.chainId;
+        this.ledger = new Ledger({testModeAllowed: CHAIN_ID.toLowerCase().indexOf( "mainnet" ) == -1});
     }
 
     close = () => {
@@ -591,7 +592,7 @@ class LedgerButton extends Component {
                 <TabContent className='ledger-modal-tab' activeTab={this.state.activeTab}>
                     <TabPane tabId="0"></TabPane>
                     <TabPane tabId="1">
-                        Please connect your Ledger device and open Cosmos App.
+                        Please connect your Ledger device and open the IOV App.
                     </TabPane>
                     {this.renderActionTab()}
                     {this.renderConfirmationTab()}

@@ -12,7 +12,8 @@ class LedgerModal extends React.Component {
             loading: false,
             activeTab: '1'
         };
-        this.ledger = new Ledger({testModeAllowed: false});
+        const CHAIN_ID = Meteor.settings.public.chainId;
+        this.ledger = new Ledger({testModeAllowed: CHAIN_ID.toLowerCase().indexOf( "mainnet" ) == -1});
     }
 
     autoOpenModal = () => {
