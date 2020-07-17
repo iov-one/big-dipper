@@ -69,18 +69,18 @@ export default TransactionsContainer = withTracker((props) => {
         }).fetch() : {},
         starnameTxs: transactionsExist ? Transactions.find({
             $or: [
-                {"tx.value.msg.type":"domain/AddAccountCertificates"},
-                {"tx.value.msg.type":"domain/DeleteAccount"},
-                {"tx.value.msg.type":"domain/DeleteAccountCertificates"},
-                {"tx.value.msg.type":"domain/DeleteDomain"},
-                {"tx.value.msg.type":"domain/RegisterAccount"},
-                {"tx.value.msg.type":"domain/RegisterDomain"},
-                {"tx.value.msg.type":"domain/RenewAccount"},
-                {"tx.value.msg.type":"domain/RenewDomain"},
-                {"tx.value.msg.type":"domain/ReplaceAccountResources"},
-                {"tx.value.msg.type":"domain/SetAccountMetadata"},
-                {"tx.value.msg.type":"domain/TransferAccount"},
-                {"tx.value.msg.type":"domain/TransferDomainAll"},
+                {"tx.value.msg.type":"starname/AddAccountCertificates"},
+                {"tx.value.msg.type":"starname/DeleteAccount"},
+                {"tx.value.msg.type":"starname/DeleteAccountCertificates"},
+                {"tx.value.msg.type":"starname/DeleteDomain"},
+                {"tx.value.msg.type":"starname/RegisterAccount"},
+                {"tx.value.msg.type":"starname/RegisterDomain"},
+                {"tx.value.msg.type":"starname/RenewAccount"},
+                {"tx.value.msg.type":"starname/RenewDomain"},
+                {"tx.value.msg.type":"starname/ReplaceAccountResources"},
+                {"tx.value.msg.type":"starname/SetAccountMetadata"},
+                {"tx.value.msg.type":"starname/TransferAccount"},
+                {"tx.value.msg.type":"starname/TransferDomainAll"},
             ]
         }).fetch() : {}
     };
