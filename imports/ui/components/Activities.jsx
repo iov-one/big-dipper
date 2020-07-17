@@ -51,29 +51,29 @@ export default class Activites extends Component {
 
         switch (msg.type){
         // starname
-        case "domain/AddAccountCertificates":
+        case "starname/AddAccountCertificates":
             return <p><span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /><T>common.fullStop</T></p>
-        case "domain/DeleteAccount":
+        case "starname/DeleteAccount":
             return <p><Account address={msg.value.fee_payer.length?msg.value.fee_payer:msg.value.owner} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span><T>common.fullStop</T></p>
-        case "domain/DeleteAccountCertificates":
+        case "starname/DeleteAccountCertificates":
             return <p><span className="text-warning"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /><T>common.fullStop</T></p>
-        case "domain/DeleteDomain":
+        case "starname/DeleteDomain":
             return <p><Account address={msg.value.fee_payer.length?msg.value.fee_payer:msg.value.owner} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary">*{msg.value.domain}</span><T>common.fullStop</T></p>
-        case "domain/RegisterAccount":
+        case "starname/RegisterAccount":
             return <p><Account address={msg.value.owner} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span><T>common.fullStop</T></p>
-        case "domain/RegisterDomain":
+        case "starname/RegisterDomain":
             return <p><Account address={msg.value.admin} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`*${msg.value.domain}`} /></span><T>common.fullStop</T></p>
-        case "domain/RenewAccount":
+        case "starname/RenewAccount":
             return <p><Account address={msg.value.signer} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span><T>common.fullStop</T></p>
-        case "domain/RenewDomain":
+        case "starname/RenewDomain":
             return <p><Account address={msg.value.signer} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`*${msg.value.domain}`} /></span><T>common.fullStop</T></p>
-        case "domain/ReplaceAccountResources":
+        case "starname/ReplaceAccountResources":
             return <p><span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /><T>common.fullStop</T></p>
-        case "domain/SetAccountMetadata":
+        case "starname/SetAccountMetadata":
             return <p><span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /><T>common.fullStop</T></p>
-        case "domain/TransferAccount":
+        case "starname/TransferAccount":
             return <p><Account address={msg.value.owner} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`${msg.value.name}*${msg.value.domain}`} /></span> <T>activities.to</T> <span className="address"><Account address={msg.value.new_owner} /></span><T>common.fullStop</T></p>
-        case "domain/TransferDomainAll":
+        case "starname/TransferDomainAll":
             return <p><Account address={msg.value.owner} /> {(this.props.invalid)?<T>activities.failedTo</T>:''}<Msg msgJson={msgJson} /> <span className="text-primary"><Starname starname={`*${msg.value.domain}`} /></span> <T>activities.to</T> <span className="address"><Account address={msg.value.new_admin} /></span><T>common.fullStop</T></p>
 
             // bank

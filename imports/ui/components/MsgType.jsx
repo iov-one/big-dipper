@@ -7,29 +7,29 @@ const T = i18n.createComponent();
 export const MsgType = (props) => {
     switch (props.type){
     // starname
-    case "domain/AddAccountCertificates":
+    case "starname/AddAccountCertificates":
         return <Badge color="info"><T>messageTypes.accountAddCertificate</T></Badge>
-    case "domain/DeleteAccount":
+    case "starname/DeleteAccount":
         return <Badge color="warning"><T>messageTypes.accountDelete</T></Badge>
-    case "domain/DeleteAccountCertificates":
+    case "starname/DeleteAccountCertificates":
         return <Badge color="warning"><T>messageTypes.accountDeleteCertificate</T></Badge>
-    case "domain/DeleteDomain":
+    case "starname/DeleteDomain":
         return <Badge color="warning"><T>messageTypes.domainDelete</T></Badge>
-    case "domain/RegisterAccount":
+    case "starname/RegisterAccount":
         return <Badge color="success"><T>messageTypes.accountRegister</T></Badge>
-    case "domain/RegisterDomain":
+    case "starname/RegisterDomain":
         return <Badge color="success"><T>messageTypes.domainRegister</T></Badge>
-    case "domain/RenewAccount":
+    case "starname/RenewAccount":
         return <Badge color="success"><T>messageTypes.accountRenew</T></Badge>
-    case "domain/RenewDomain":
+    case "starname/RenewDomain":
         return <Badge color="success"><T>messageTypes.domainRenew</T></Badge>
-    case "domain/ReplaceAccountResources":
+    case "starname/ReplaceAccountResources":
         return <Badge color="info"><T>messageTypes.accountReplaceResources</T></Badge>
-    case "domain/SetAccountMetadata":
+    case "starname/SetAccountMetadata":
         return <Badge color="info"><T>messageTypes.accountSetMetadata</T></Badge>
-    case "domain/TransferAccount":
+    case "starname/TransferAccount":
         return <Badge color="secondary"><T>messageTypes.accountTransfer</T></Badge>
-    case "domain/TransferDomainAll":
+    case "starname/TransferDomainAll":
         return <Badge color="secondary"><T>messageTypes.domainTransfer</T></Badge>
 
         // bank
