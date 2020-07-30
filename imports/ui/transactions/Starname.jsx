@@ -91,7 +91,8 @@ export default class Starname extends Component {
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.certificates ? data.certificates.length : 0}</Col>
                                 <Col md={4} className="label"><T>starname.metadata</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.metadata_uri}</Col>
-                                <Col md={12} className="label"><T>starname.resources</T></Col>
+                                <Col md={4} className="label"><T>starname.resources</T></Col>
+                                <Col md={8} className="value text-nowrap overflow-auto"></Col>
                                 {data.resources && data.resources.sort( ( a, b ) => a.uri < b.uri ).map( ( resource, i ) => {
                                     return <Fragment key={i}><Col md={4} className="label">{resource.uri}</Col><Col md={8} className="value text-nowrap overflow-auto">{resource.resource}</Col></Fragment>
                                 } )}
