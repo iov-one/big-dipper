@@ -11,7 +11,7 @@ export default BlockContainer = withTracker((props) => {
     if (Meteor.isClient){
         blockHandle = Meteor.subscribe('blocks.findOne', parseInt(props.match.params.blockId));
         transactionHandle = Meteor.subscribe('transactions.height', parseInt(props.match.params.blockId));
-        loading = !blockHandle.ready() && !transactionHandle.ready();    
+        loading = !blockHandle.ready() && !transactionHandle.ready();
     }
 
     let block, txs, transactionsExist, blockExist;
@@ -29,7 +29,6 @@ export default BlockContainer = withTracker((props) => {
             transactionsExist = !loading && !!txs;
             blockExist = !loading && !!block;
         }
-        
     }
 
     return {
@@ -77,5 +76,21 @@ export default BlockContainer = withTracker((props) => {
                 {"tx.value.msg.type":"cosmos-sdk/IBCReceiveMsg"}
             ]
         }).fetch() : {},
+        starnameTxs: transactionsExist ? Transactions.find({
+            $or: [
+                {"tx.value.msg.type":"starname/AddAccountCertificates"},
+                {"tx.value.msg.type":"starname/DeleteAccount"},
+                {"tx.value.msg.type":"starname/DeleteAccountCertificates"},
+                {"tx.value.msg.type":"starname/DeleteDomain"},
+                {"tx.value.msg.type":"starname/RegisterAccount"},
+                {"tx.value.msg.type":"starname/RegisterDomain"},
+                {"tx.value.msg.type":"starname/RenewAccount"},
+                {"tx.value.msg.type":"starname/RenewDomain"},
+                {"tx.value.msg.type":"starname/ReplaceAccountResources"},
+                {"tx.value.msg.type":"starname/SetAccountMetadata"},
+                {"tx.value.msg.type":"starname/TransferAccount"},
+                {"tx.value.msg.type":"starname/TransferDomainAll"},
+            ]
+        }).fetch() : {}
     };
 })(Block);
