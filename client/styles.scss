@@ -1037,3 +1037,13 @@ body {
     cursor: help;
     opacity: 0.7;
   }
+
+  #starname {
+     .label {
+      text-align: right;
+      }
+
+      .card-header {
+         padding-left: 0;
+      }
+  }

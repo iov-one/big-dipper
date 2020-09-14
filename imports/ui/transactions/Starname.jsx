@@ -22,10 +22,10 @@ export default class Starname extends Component {
 
     async fetchDetails() {
         const domain = this.state.starname.split( "*" );
-        const rpc = Meteor.settings.public.urlRest;
+        const urlRest = Meteor.settings.public.urlRest;
         const responses = await Promise.all( [
-            fetch( `${rpc}/starname/query/resolve`, { method: "POST", body: JSON.stringify( { starname: this.state.starname } ) } ).catch( e => { throw e } ),
-            fetch( `${rpc}/starname/query/domainInfo`, { method: "POST", body: JSON.stringify( { name: domain.length == 1 ? domain[0] : domain[1] } ) } ).catch( e => { throw e } ),
+            fetch( `${urlRest}/starname/query/resolve`, { method: "POST", body: JSON.stringify( { starname: this.state.starname } ) } ).catch( e => { throw e } ),
+            fetch( `${urlRest}/starname/query/domainInfo`, { method: "POST", body: JSON.stringify( { name: domain.length == 1 ? domain[0] : domain[1] } ) } ).catch( e => { throw e } ),
         ] );
         const resolved = await responses[0].json();
         const infoed = await responses[1].json();
@@ -80,7 +80,7 @@ export default class Starname extends Component {
                         <CardBody>
                             <Row>
                                 <Col md={4} className="label card-header"><T>starname.starname</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto card-header">{this.props.starname}</Col>
+                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/resolve/${this.props.starname}`} target="_blank">{this.props.starname}</a></Col>
                                 <Col md={4} className="label"><T>starname.owner</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto address"><Account address={data.owner} /></Col>
                                 <Col md={4} className="label"><T>starname.broker</T></Col>
@@ -91,7 +91,8 @@ export default class Starname extends Component {
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.certificates ? data.certificates.length : 0}</Col>
                                 <Col md={4} className="label"><T>starname.metadata</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{data.metadata_uri}</Col>
-                                <Col md={12} className="label"><T>starname.resources</T></Col>
+                                <Col md={4} className="label"><T>starname.resources</T></Col>
+                                <Col md={8} className="value text-nowrap overflow-auto"></Col>
                                 {data.resources && data.resources.sort( ( a, b ) => a.uri < b.uri ).map( ( resource, i ) => {
                                     return <Fragment key={i}><Col md={4} className="label">{resource.uri}</Col><Col md={8} className="value text-nowrap overflow-auto">{resource.resource}</Col></Fragment>
                                 } )}
@@ -102,7 +103,7 @@ export default class Starname extends Component {
                         <CardBody>
                             <Row>
                                 <Col md={4} className="label card-header"><T>starname.domain</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto card-header">{info.name}</Col>
+                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/resolve/*${info.name}`} target="_blank">{info.name}</a></Col>
                                 <Col md={4} className="label"><T>starname.type</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{info.type}</Col>
                                 <Col md={4} className="label"><T>starname.admin</T></Col>
