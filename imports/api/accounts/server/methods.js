@@ -2,8 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { Validators } from '/imports/api/validators/validators.js';
 const fetchFromUrl = (url) => {
+    let res;
     try{
-        let res = HTTP.get(LCD + url);
+        res = HTTP.get(LCD + url);
         if (res.statusCode == 200){
             return res
         };
