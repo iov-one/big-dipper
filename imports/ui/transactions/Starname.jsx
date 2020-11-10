@@ -80,7 +80,7 @@ export default class Starname extends Component {
                         <CardBody>
                             <Row>
                                 <Col md={4} className="label card-header"><T>starname.starname</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/resolve/${this.props.starname}`} target="_blank">{this.props.starname}</a></Col>
+                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/${this.props.starname}`} target="_blank">{this.props.starname}</a></Col>
                                 <Col md={4} className="label"><T>starname.owner</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto address"><Account address={data.owner} /></Col>
                                 <Col md={4} className="label"><T>starname.broker</T></Col>
@@ -103,7 +103,7 @@ export default class Starname extends Component {
                         <CardBody>
                             <Row>
                                 <Col md={4} className="label card-header"><T>starname.domain</T></Col>
-                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/resolve/*${info.name}`} target="_blank">{info.name}</a></Col>
+                                <Col md={8} className="value text-nowrap overflow-auto card-header"><a href={`https://starname.me/*${info.name}`} target="_blank">{info.name}</a></Col>
                                 <Col md={4} className="label"><T>starname.type</T></Col>
                                 <Col md={8} className="value text-nowrap overflow-auto">{info.type}</Col>
                                 <Col md={4} className="label"><T>starname.admin</T></Col>
