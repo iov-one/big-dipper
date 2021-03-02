@@ -25,7 +25,6 @@ common:
     rewards: 'Nagrody'
 navbar:
     siteName: 'Wielki Wóz'
-    version: 'beta'
     validators: 'Walidatorzy'
     blocks: 'Bloki'
     transactions: 'Transakcje'
@@ -39,6 +38,7 @@ navbar:
     russian: "Русский"
     chinese: "中文（繁）"
     simChinese: "中文（简）"
+    portuguese: "Português"
     license: 'LICENCJA'
     forkMe: 'Fork me!'
 consensus:

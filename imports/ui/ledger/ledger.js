@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // https://github.com/zondax/cosmos-delegation-js/
 // https://github.com/cosmos/ledger-cosmos-js/blob/master/src/index.js
 import 'babel-polyfill';
@@ -364,7 +365,7 @@ export class Ledger {
         // eslint-disable-next-line no-param-reassign
         unsignedTx.value.fee = {
             amount: [{
-                amount: Math.round(gas * gasPrice).toString(),
+                amount: Math.ceil(gas * gasPrice).toString(),
                 denom: denom,
             }],
             gas: gas.toString(),

@@ -1,4 +1,4 @@
-FROM geoffreybooth/meteor-base:1.10.1
+FROM geoffreybooth/meteor-base:1.12.1
 
 COPY package*.json $APP_SOURCE_FOLDER/
 
@@ -23,7 +23,7 @@ COPY --from=0 $SCRIPTS_FOLDER $SCRIPTS_FOLDER/
 
 COPY --from=0 $APP_BUNDLE_FOLDER/bundle $APP_BUNDLE_FOLDER/bundle/
 
-RUN bash $SCRIPTS_FOLDER/build-meteor-npm-dependencies.sh
+RUN bash $SCRIPTS_FOLDER/build-meteor-npm-dependencies.sh --build-from-source
 
 FROM node:12.16.1-alpine
 

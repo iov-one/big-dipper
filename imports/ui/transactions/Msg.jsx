@@ -1,7 +1,7 @@
 import { Container, Card, CardBody } from 'reactstrap';
 import { Helmet } from 'react-helmet';
 import { MsgType } from '../components/MsgType.jsx';
-import JSONPretty from 'react-json-pretty';
+import ReactJson from 'react-json-view';
 import React, { Component } from 'react';
 
 
@@ -35,7 +35,7 @@ export default class Msg extends Component {
             <Card>
                 <div className="card-header"><h4><MsgType type={msg.type} /></h4></div>
                 <CardBody>
-                    <div><JSONPretty id="json-pretty" data={msg}></JSONPretty></div>
+                    <div><ReactJson id="json-pretty" src={msg.value}></ReactJson></div>
                 </CardBody>
             </Card>
         </Container>
