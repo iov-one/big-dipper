@@ -69,6 +69,19 @@ Meteor.methods({
             }
             chain.activeVotingPower = activeVP;
 
+            // fetch the conspicuously missing governance tally parameters
+            if (!chain.gov && Meteor.settings.public.modules.gov){
+                url = LCD + '/gov/parameters/tallying';
+                try{
+                    response = HTTP.get(url);
+                    let tallyParams = JSON.parse(response.content).result;
+                    chain.gov = {tallyParams};
+                    }
+                catch(e){
+                    console.log(url);
+                    console.log(e.response.content);
+                }
+            }
 
             Chain.update({chainId:chain.chainId}, {$set:chain}, {upsert: true});
             // Get chain states
