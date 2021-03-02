@@ -1,0 +1,49 @@
+{
+  "public":{
+    "urlRest": "http://slim.avaritia.com:4317",
+    "chainName": "IOV Name Service",
+    "chainId": "iovns-galaxynet",
+    "gtm": "",
+    "slashingWindow": 10000,
+    "uptimeWindow": 100,
+    "initialPageSize": 30,
+    "bech32PrefixAccAddr": "star",
+    "bech32PrefixAccPub": "starpub",
+    "bech32PrefixValAddr": "starvaloper",
+    "bech32PrefixValPub": "starvaloperpub",
+    "bech32PrefixConsAddr": "starvalcons",
+    "bech32PrefixConsPub": "starvalconspub",
+    "bondDenom": "uvoi",
+    "powerReduction": 1000000,
+    "coins": [
+      {
+        "denom": "uvoi",
+        "displayName": "VOI",
+        "displayNamePlural": "VOIs",
+        "fraction": 1e6
+      }
+    ],
+    "gasPrice": 1.0,
+    "coingeckoId": "starname"
+  },
+  "genesisFile": "https://rpc.cluster-galaxynet.iov.one/genesis",
+  "remote":{
+    "rpc":"http://slim.avaritia.com:56657",
+    "lcd":"http://slim.avaritia.com:4317"
+  },
+  "debug": {
+    "startTimer": true,
+    "readGenesis": false
+  },
+  "params":{
+    "startHeight": 0,
+    "defaultBlockTime": 5000,
+    "blockInterval": 15000,
+    "consensusInterval": 1000,
+    "statusInterval":7500,
+    "signingInfoInterval": 1800000,
+    "proposalInterval": 5000,
+    "missedBlocksInterval": 60000,
+    "delegationInterval": 900000
+  }
+}
