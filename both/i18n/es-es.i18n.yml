@@ -38,6 +38,7 @@ navbar:
     russian: "Русский"
     chinese: "中文（繁）"
     simChinese: "中文（简）"
+    portuguese: "Português"
     license: 'LICENCIA'
     forkMe: 'Fork me!'
 consensus:
@@ -139,7 +140,7 @@ transactions:
     transfer: 'Transferencia'
     staking: 'Participación'
     distribution: 'Distribución'
-    governance: 'Governanza'
+    governance: 'Gobernanza'
     slashing: 'Recorte'
 proposals:
     notFound: 'No se ha encontrado el proposal.'

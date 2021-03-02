@@ -1,12 +1,77 @@
 # Changelog
 
-## [Unreleased]
+## v0.39.x-7
 
+* [#452] Fix VP Chart not being shown
+
+## v0.39.x-6
+
+* Index transactions with timer settings
+
+## v0.39.x-5
+
+* [#444] Fetch keybase in async function with query interval contolled by settings
+* Fix missing value in VP distribution
+
+## v0.39.x-4
+
+* [#436] Index transactions in a separate process
+* Update to Meteor 1.12
+* [#435] Show inflation as 0% if there is no inflation (no minting module integrated)
+* [#433] Create tx index for MsgCreateValidator
+* Use react-json-view instead of JSONPretty
+* Update uptime with signing info
+* [#280] Remove reading genesis file
+* Remove plural denom
+* Simplify validator storing
+* Get data and show proposal based on enabled modules
+* Calculate validator uptime in async
+
+## v0.39.x-3
+
+* [#431] Create correct index for trasaction events
+
+## v0.39.x-2
+
+* [#392] Fixed account page not rendering when the account is empty
+* [#413] Fixed validator page error after logging in with Ledger
+
+## v0.39.x-1
+
+* [#425] Fixed `commission_rates` might not exists in `validator.commission` object
+
+## v0.39.x
+
+* [#420] Update brand font
+* [#418] Fix avatar at delegation pane
+* [#404] Replace "casted" with "cast"
+* [#421] Fix NaN on account delegation pane
+* [#417] Fix NaN on account total value
+* [#416] Add version number to UI
+* Bump Meteor to v1.11.1 and update some dependency pcakges with security issues
+* Dockerize big-dipper
 * [#306] Display errors with SDK v0.38 format
 * [#301] Using Jazzicon as avatar if no Keybase avatar exists
 * [#297] Prettify unrecognized JSON messages
 * [#294] Fixed cloneDeep typo in Account section for case-sensitve filesystems.
 * [#284] Support Tendermint v0.33 block format
+* [#346] Changed "Governanza" typo to "Gobernanza" in Spanish Translation
+* [#375] Fixed the Commission Value Calculations that caused Account Page to break
+* [#372] Fixed Redelegation List showing on all account pages
+
+## v0.37.x-patch-11
+
+* [#303] Fixed wrong validator display in unjail message
+* [#294] Fixed cloneDeep typo in Account section for case-sensitve filesystems.
+* [#298] Fixed NaN values for Rewards and Commissions that were displayed after clicking Withdrawal Button
+* [#288] Add Secp256p1 validator pubkey type. A new paramemter in public setting is added to control whether the validator pubkey is seck256p1 or default ed25519. If `secp256k1` in `settings.json` is set to `true`, it will see all validator pubkeys in Secp256k1 format.
+* Fixed Commission bug in AccountTooltip to read rates from validator.commission.commission_rates.rate & validator.commission.rate
+* Added Russian transation
+* Fixed Unjail message with a correct account address.
+* [#323] Display rewards amount in activities list.
+* [#327] Fixed error in Proposals section to accept String and Number as a value in Changes table
+* Hide Italian it-IT Translation
+* Fixed hash overflow on mobile in Transaction Section (Added scroller)
 
 ## v0.37.x-patch-10.1
 
