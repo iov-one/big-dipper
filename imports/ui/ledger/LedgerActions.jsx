@@ -691,10 +691,15 @@ class DelegationButtons extends LedgerButton {
     }
 
     getWarningMessage = () => {
-        let duration = this.props.stakingParams.unbonding_time;
-        let maxEntries = this.props.stakingParams.max_entries;
         let warning = TypeMeta[this.state.actionType].warning;
-        return warning && warning(duration, maxEntries);
+        if (typeof warning == "function") {
+            if (this.props.stakingParams) {
+                let duration = this.props.stakingParams.unbonding_time;
+                let maxEntries = this.props.stakingParams.max_entries;
+                return warning(duration, maxEntries);
+            }
+        }
+        return null;
     }
 
     getConfirmationMessage = () => {
