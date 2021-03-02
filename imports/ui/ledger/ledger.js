@@ -169,7 +169,7 @@ class CosmosApp extends IovLedgerApp {
         return {
             return_code: response.returnCode,
             error_message: response.errorMessage,
-            signature: Buffer.from(response.signature.toDer()),
+            signature: Buffer.from( response.signature ),
         };
     }
 }
