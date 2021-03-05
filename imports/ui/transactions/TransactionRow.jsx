@@ -10,22 +10,13 @@ import numbro from 'numbro';
 import Coin from '/both/utils/coins.js'
 import SentryBoundary from '../components/SentryBoundary.jsx';
 import { Markdown } from 'react-showdown';
+import starnameFee from './starnameFee.js';
 
 let showdown  = require('showdown');
 showdown.setFlavor('github');
 
 export const TransactionRow = (props) => {
     let tx = props.tx;
-    const starnameFee = tx.logs && tx.logs.length ? tx.logs.reduce( ( fee, msg ) => {
-        const events = msg.events;
-        if ( events[0].type == "message" && events[0].attributes.find( attribute => attribute.key == "module" && attribute.value == "starname" ) ) {
-            if ( events[1].type == "transfer" ) {
-               const amount = events[1].attributes.find( attribute => attribute.key == "amount" );
-               fee += parseInt( amount.value );
-            }
-        }
-        return fee;
-    }, 0 ) : 0;
 
     return <SentryBoundary><Row className={(tx.code)?"tx-info invalid":"tx-info"}>
         <Col xs={12} lg={7} className="activity">{(tx.tx.value.msg && tx.tx.value.msg.length >0)?tx.tx.value.msg.map((msg,i) => {
@@ -41,7 +32,7 @@ export const TransactionRow = (props) => {
         {(!props.blockList)?<Col xs={4} md={2} lg={1}><i className="fas fa-database d-lg-none"></i> <Link to={"/blocks/"+tx.height}>{numbro(tx.height).format("0,0")}</Link></Col>:''}
         <Col xs={(!props.blockList)?2:4} md={1}>{(!tx.code)?<TxIcon valid />:<TxIcon />}</Col>
         <Col xs={(!props.blockList)?6:8} md={(!props.blockList)?9:4} lg={2} className="fee"><i className="material-icons d-lg-none">monetization_on</i> {(tx.tx.value.fee.amount.length > 0)?tx.tx.value.fee.amount.map((fee,i) => {
-            return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount)+starnameFee, (fee)?fee.denom:null)).stakeString()}</span>
+            return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount)+starnameFee(tx), (fee)?fee.denom:null)).stakeString()}</span>
         }):<span>No fee</span>}</Col>
         {(tx.code)?<Col xs={{size:12, order:"last"}} className="error">
             <Alert color="danger">
