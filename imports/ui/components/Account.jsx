@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { Validators } from '/imports/api/validators/validators.js';
 
-const AddressLength = 40;
+const delimiter = Meteor.settings.public.starnameLookup.delimiter;
 
 export default class Account extends Component{
     constructor(props){
@@ -33,41 +33,30 @@ export default class Account extends Component{
             });
         else
             this.setState({
-                address: `/validator/${address}`,
+                address: `/account/${address}`,
                 moniker: address,
                 validator: null
             });
     }
 
     updateAccount = () => {
-        let address = this.props.address;
-        Meteor.call('Transactions.findUser', this.props.address, this.getFields(), (error, result) => {
-            if (result){
-                // console.log(result);
-                this.setState({
-                    address: `/validator/${result.address}`,
-                    moniker: result.description?result.description.moniker:result.operator_address,
-                    validator: result
-                });
+        Meteor.call( 'Transactions.findUser', this.props.address, this.getFields(), ( error, result ) => {
+            if ( result ) {
+                if ( result.accounts ) { // not validator
+                    const now = Date.now() / 1000; // convert to seconds to match valid_until
+                    const starnames = result.accounts.filter( account => account.valid_until >= now ).map( account => `${account.name}*${account.domain}` );
+                    this.setState( {
+                        moniker: starnames.length ? starnames.sort().join( delimiter ) : this.props.address,
+                    } );
+                } else { // validator
+                    this.setState( {
+                        address: `/validator/${result.address}`,
+                        moniker: result.description ? result.description.moniker : result.operator_address,
+                        validator: result
+                    } );
+                }
             }
-        })
-    }
-
-    getAccount = () => {
-        let address = this.props.address;
-        let validator = Validators.findOne(
-            {$or: [{operator_address:address}, {delegator_address:address}, {address:address}]},
-            {fields: {address:1, description:1, operator_address:1, delegator_address:1}});
-        if (validator)
-            this.setState({
-                address: `/validator/${validator.address}`,
-                moniker: validator.description.moniker
-            });
-        else
-            this.setState({
-                address: `/validator/${address}`,
-                moniker: address
-            });
+        } );
     }
 
     componentDidMount(){
