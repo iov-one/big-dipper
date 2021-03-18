@@ -103,7 +103,14 @@ Meteor.methods({
         if (validator){
             return validator;
         }
-        return false;
+        // address is not a validator; look-up its starname
+        const url = LCD + "/starname/query/resourceAccounts"; // HARD-CODED
+        const testnet = url.indexOf( "mainnet" ) == -1 ? "-testnet" : ""; // HARD-CODED
+        const uri = `asset${testnet}:iov`; // FIXME; UGLY; HACK; HARD-CODED
+        const resource = { uri, resource:address };
+        const data = { resource };
+        const response = HTTP.post( url, { data } );
 
-    }
+        return response.statusCode == 200 ? response.data.result : false;
+    },
 });
