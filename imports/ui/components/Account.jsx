@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { Validators } from '/imports/api/validators/validators.js';
 
-const AddressLength = 40;
+const delimiter = Meteor.settings.public.starnameLookup.delimiter;
 
 export default class Account extends Component{
     constructor(props){
@@ -46,7 +46,7 @@ export default class Account extends Component{
                     const now = Date.now() / 1000; // convert to seconds to match valid_until
                     const starnames = result.accounts.filter( account => account.valid_until >= now ).map( account => `${account.name}*${account.domain}` );
                     this.setState( {
-                        moniker: starnames.length ? starnames.sort().join( " | " ) : this.props.address, // HARD-CODED delimiter
+                        moniker: starnames.length ? starnames.sort().join( delimiter ) : this.props.address,
                     } );
                 } else { // validator
                     this.setState( {

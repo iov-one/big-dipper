@@ -105,8 +105,7 @@ Meteor.methods({
         }
         // address is not a validator; look-up its starname
         const url = LCD + "/starname/query/resourceAccounts"; // HARD-CODED
-        const testnet = url.indexOf( "mainnet" ) == -1 ? "-testnet" : ""; // HARD-CODED
-        const uri = `asset${testnet}:iov`; // FIXME; UGLY; HACK; HARD-CODED
+        const uri = Meteor.settings.public.starnameLookup.uri;
         const resource = { uri, resource:address };
         const data = { resource };
         const response = HTTP.post( url, { data } );
