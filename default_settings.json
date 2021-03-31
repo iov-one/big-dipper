@@ -29,9 +29,9 @@
         ],
         "modules": {
             "supply": true,
-            "minting": false,
+            "minting": true,
             "gov": true,
-            "distribution": false
+            "distribution": true
         },
         "gasPrice": 0.02,
         "coingeckoId": "cosmos"
