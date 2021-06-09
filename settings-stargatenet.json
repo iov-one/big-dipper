@@ -1,0 +1,73 @@
+{
+  "public": {
+    "urlRest": "https://api.cluster-stargatenet.iov.one",
+    "chainName": "Starname (IOV)",
+    "chainId": "stargatenet",
+    "gtm": "{Add your Google Tag Manager ID here}",
+    "slashingWindow": 10000,
+    "uptimeWindow": 100,
+    "initialPageSize": 30,
+    "secp256k1": false,
+    "bech32PrefixAccAddr": "star",
+    "bech32PrefixAccPub": "starpub",
+    "bech32PrefixValAddr": "starvaloper",
+    "bech32PrefixValPub": "starvaloperpub",
+    "bech32PrefixConsAddr": "starvalcons",
+    "bech32PrefixConsPub": "starvalconspub",
+    "bondDenom": "uvoi",
+    "powerReduction": 1000000,
+    "coins": [
+      {
+        "denom": "uvoi",
+        "displayName": "VOI",
+        "displayNamePlural": "VOIs",
+        "fraction": 1000000
+      },
+      {
+        "denom": "umuon",
+        "displayName": "MUON",
+        "fraction": 1000000
+      }
+    ],
+    "ledger": {
+      "coinType": 234,
+      "appName": "IOV",
+      "appVersion": "2.16.4",
+      "gasPrice": 2
+    },
+    "modules": {
+      "bank": true,
+      "supply": true,
+      "minting": true,
+      "gov": true,
+      "distribution": true
+    },
+    "coingeckoId": "starname",
+    "banners": false,
+    "starnameLookup": {
+      "uri": "asset:voi",
+      "delimiter": " | "
+    }
+  },
+  "remote": {
+    "rpc": "https://rpc.cluster-stargatenet.iov.one:443",
+    "api": "https://api.cluster-stargatenet.iov.one:443"
+  },
+  "debug": {
+    "startTimer": true
+  },
+  "params": {
+    "startHeight": 0,
+    "defaultBlockTime": 5000,
+    "validatorUpdateWindow": 300,
+    "blockInterval": 15000,
+    "transactionsInterval": 18000,
+    "keybaseFetchingInterval": 18000000,
+    "consensusInterval": 1000,
+    "statusInterval": 7500,
+    "signingInfoInterval": 1800000,
+    "proposalInterval": 5000,
+    "missedBlocksInterval": 60000,
+    "delegationInterval": 900000
+  }
+}
