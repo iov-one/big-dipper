@@ -17,7 +17,7 @@ export default class Distribution extends Component{
     render(){
         return <div id="voting-power-dist">
             <Helmet>
-                <title>Voting Power Distribution On The Starname Network By IOV | The Big Dipper</title>
+                <title>Voting Power Distribution On The Starname (IOV) Network | The Big Dipper</title>
                 <meta name="description" content="We would like to keep track how voting power are distributed over time among validators." />
             </Helmet>
             <Row>

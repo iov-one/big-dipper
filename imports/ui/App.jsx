@@ -18,6 +18,7 @@ import SearchBar from '/imports/ui/components/SearchBar.jsx';
 import moment from 'moment';
 import SentryBoundary from '/imports/ui/components/SentryBoundary.jsx';
 import NotFound from '/imports/ui/pages/NotFound.jsx';
+import Banners from '/imports/ui/components/Banners.jsx';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -74,31 +75,30 @@ class App extends Component {
 
         return(
             // <Router history={history}>
-                <div>
-                    {(Meteor.settings.public.gtm)?<GoogleTagManager gtmId={Meteor.settings.public.gtm} />:''}
-                    <RouteHeader refreshApp={this.propagateStateChange}/>
-                    <Container fluid id="main">
-                        <ToastContainer />
-                        <SentryBoundary>
-                            <MobileSearchBar />
-                            <Switch>
-                                <Route exact path="/" component={Home} />
-                                <Route path="/blocks" component={BlocksTable} />
-                                <Route path="/transactions" component={Transactions} />
-                                <Route path="/starname" component={Transactions} />
-                                <Route path="/msg" component={Transactions} />
-                                <Route path="/account/:address" render={(props)=><Account {...props} />} />
-                                <Route path="/validators" exact component={Validators} />
-                                <Route path="/validators/inactive" render={(props) => <Validators {...props} inactive={true} />} />
-                                <Route path="/voting-power-distribution" component={Distribution} />
-                                <Route path="/(validator|validators)" component={ValidatorDetails} />
-                                {Meteor.settings.public.modules.gov?<Route path="/proposals" component={Proposals} />:null}
-                                <Route component={NotFound} />
-                            </Switch>
-                        </SentryBoundary>
-                    </Container>
-                    <Footer />
-                </div>
+            <div>
+                {(Meteor.settings.public.gtm)?<GoogleTagManager gtmId={Meteor.settings.public.gtm} />:''}
+                <RouteHeader refreshApp={this.propagateStateChange}/>
+                <Container fluid id="main">
+                    {(Meteor.settings.public.banners)?<Banners url={Meteor.settings.public.banners}/>:''}
+                    <ToastContainer />
+                    <SentryBoundary>
+                        <MobileSearchBar />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/blocks" component={BlocksTable} />
+                            <Route path="/transactions" component={Transactions} />
+                            <Route path="/account/:address" render={(props)=><Account {...props} />} />
+                            <Route path="/validators" exact component={Validators} />
+                            <Route path="/validators/inactive" render={(props) => <Validators {...props} inactive={true} />} />
+                            <Route path="/voting-power-distribution" component={Distribution} />
+                            <Route path="/(validator|validators)" component={ValidatorDetails} />
+                            {Meteor.settings.public.modules.gov?<Route path="/proposals" component={Proposals} />:null}
+                            <Route component={NotFound} />
+                        </Switch>
+                    </SentryBoundary>
+                </Container>
+                <Footer />
+            </div>
             // </Router>
         );
     }

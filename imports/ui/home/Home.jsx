@@ -7,6 +7,8 @@ import Consensus from './ConsensusContainer.js';
 import TopValidators from './TopValidatorsContainer.js';
 import Chart from './ChartContainer.js';
 import { Helmet } from "react-helmet";
+import BlocksTable from '/imports/ui/blocks/BlocksTable.jsx'
+import Transactions from '/imports/ui/transactions/TransactionsList.jsx'
 
 export default class Home extends Component{
     constructor(props){
@@ -16,18 +18,18 @@ export default class Home extends Component{
     render() {
         return <div id="home">
             <Helmet>
-                <title>The Starname Network By IOV</title>
+                <title>The Starname (IOV) Network</title>
                 <meta name="description" content="Eradicate digital asset addresses by using The Starname Network." />
             </Helmet>
             <ChainInfo/>
             <Consensus />
             <ChainStatus />
             <Row>
-                <Col md={6}>
-                    <TopValidators />
+                <Col md={6} className="mb-2">
+                    <BlocksTable homepage={true} />
                 </Col>
-                <Col md={6}>
-                    <Chart />
+                <Col md={6} className="mb-2">
+                    <Transactions homepage={true}/>
                 </Col>
             </Row>
         </div>

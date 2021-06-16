@@ -1,9 +1,10 @@
+/* eslint-disable camelcase */
+
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { Validators } from '/imports/api/validators/validators.js';
 
-const delimiter = Meteor.settings.public.starnameLookup.delimiter;
 
 export default class Account extends Component{
     constructor(props){
@@ -12,7 +13,8 @@ export default class Account extends Component{
         this.state = {
             address: `/account/${this.props.address}`,
             moniker: this.props.address,
-            validator: null
+            validator: null,
+            homepage: window?.location?.pathname === '/' ? true : false
         }
     }
 
@@ -27,8 +29,8 @@ export default class Account extends Component{
             {fields: this.getFields() });
         if (validator)
             this.setState({
-                address: `/validator/${validator.address}`,
-                moniker: validator.description?validator.description.moniker:validator.operator_address,
+                address: `/validator/${validator?.operator_address}`,
+                moniker: validator?.description?.moniker ?? validator?.operator_address,
                 validator: validator
             });
         else
@@ -40,24 +42,19 @@ export default class Account extends Component{
     }
 
     updateAccount = () => {
-        Meteor.call( 'Transactions.findUser', this.props.address, this.getFields(), ( error, result ) => {
-            if ( result ) {
-                if ( result.accounts ) { // not validator
-                    const now = Date.now() / 1000; // convert to seconds to match valid_until
-                    const starnames = result.accounts.filter( account => account.valid_until >= now ).map( account => `${account.name}*${account.domain}` );
-                    this.setState( {
-                        moniker: starnames.length ? starnames.sort().join( delimiter ) : this.props.address,
-                    } );
-                } else { // validator
-                    this.setState( {
-                        address: `/validator/${result.address}`,
-                        moniker: result.description ? result.description.moniker : result.operator_address,
-                        validator: result
-                    } );
-                }
+        let address = this.props.address;
+        Meteor.call('Transactions.findUser', this.props.address, this.getFields(), (error, result) => {
+            if (result){
+                // console.log(result);
+                this.setState({
+                    address: `/validator/${result?.operator_address}`,
+                    moniker: result?.description?.moniker ?? result?.operator_address,
+                    validator: result
+                });
             }
-        } );
+        })
     }
+
 
     componentDidMount(){
         if (this.props.sync)
@@ -90,7 +87,7 @@ export default class Account extends Component{
     }
 
     render(){
-        return <span className={(this.props.copy)?"address overflow-auto d-inline-block copy":"address overflow-auto d-inline"} >
+        return <span className={this.state.homepage == true ? "address overflow-auto d-inline h6 font-weight-normal copy" : (this.props.copy)?"address overflow-auto d-inline-block copy":"address overflow-auto d-inline"} >
             <Link to={this.state.address}>{this.userIcon()}{this.state.moniker}</Link>
         </span>
     }
