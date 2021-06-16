@@ -28,15 +28,15 @@ export default class BlocksTable extends Component {
     isBottom(el) {
         return el.getBoundingClientRect().bottom <= window.innerHeight;
     }
-      
+
     componentDidMount() {
         document.addEventListener('scroll', this.trackScrolling);
     }
-    
+
     componentWillUnmount() {
         document.removeEventListener('scroll', this.trackScrolling);
     }
-    
+
     trackScrolling = () => {
         const wrappedElement = document.getElementById('block-table');
         if (this.isBottom(wrappedElement)) {
@@ -73,27 +73,27 @@ export default class BlocksTable extends Component {
                 }
                 Meteor.clearTimeout(timer);
             },500)
-        }); 
+        });
     }
 
     render(){
 
         return !this.props.homepage ? <div>
             <Helmet>
-                <title>Latest Blocks | Big Dipper</title>
-                <meta name="description" content="Latest blocks committed by validators" />
+                <title>Latest Blocks On The Starname (IOV) Network | The Big Dipper</title>
+                <meta name="description" content="Latest blocks committed by validators on the Starname Network" />
             </Helmet>
             <Row>
                 <Col md={3} xs={12}><h1 className="d-none d-lg-block"><T>blocks.latestBlocks</T></h1></Col>
                 <Col md={9} xs={12} className="text-md-right"><ChainStates /></Col>
             </Row>
             <Switch>
-                <Route path="/blocks/:blockId" render={(props)=> <Sidebar 
+                <Route path="/blocks/:blockId" render={(props)=> <Sidebar
                     sidebar={<Block {...props} />}
                     open={this.state.sidebarOpen}
                     onSetOpen={this.onSetSidebarOpen}
-                    styles={{ sidebar: { 
-                        background: "white", 
+                    styles={{ sidebar: {
+                        background: "white",
                         position: "fixed",
                         width: '85%',
                         zIndex: 4
@@ -134,11 +134,11 @@ export default class BlocksTable extends Component {
                                         }}
                                     >
                                     </Sidebar>} />
-                                    
+
                                 </Switch>
                             </tr>
                         </thead>
-                        <tbody> 
+                        <tbody>
                             <Blocks limit={this.state.limit} /></tbody>
                     </Table>
                 </CardBody>

@@ -109,7 +109,7 @@ const CoinAmount = (props) => {
     else{
         let denomFinder =  Meteor.settings.public.coins.find(({ denom }) => denom === props.denom);
         let displayDenom = denomFinder ? denomFinder.displayName : null;
-        
+
         let finder = props.amount.find(({ denom }) => denom === props.denom)
         coin = finder ? new Coin(finder.amount, finder.denom).toString(6) : '0.000000 ' + displayDenom;
     }
@@ -168,7 +168,8 @@ class LedgerButton extends Component {
             transportBLE: localStorage.getItem(BLELEDGERCONNECTION),
             memo: DEFAULT_MEMO
         };
-        this.ledger = new Ledger({testModeAllowed: false});
+        const CHAIN_ID = Meteor.settings.public.chainId;
+        this.ledger = new Ledger({testModeAllowed: CHAIN_ID.toLowerCase().indexOf( "mainnet" ) == -1});
     }
 
     close = () => {
@@ -606,7 +607,7 @@ class LedgerButton extends Component {
                 <TabContent className='ledger-modal-tab' activeTab={this.state.activeTab}>
                     <TabPane tabId="0"></TabPane>
                     <TabPane tabId="1">
-                        Please connect your Ledger device and open Cosmos App.
+                        Please connect your Ledger device and open the IOV App.
                     </TabPane>
                     {this.renderActionTab()}
                     {this.renderConfirmationTab()}
@@ -707,7 +708,14 @@ class DelegationButtons extends LedgerButton {
         let duration = parseInt(this.props.stakingParams.unbonding_time.substr(0, this.props.stakingParams.unbonding_time.length-1));
         let maxEntries = this.props.stakingParams.max_entries;
         let warning = TypeMeta[this.state.actionType].warning;
-        return warning && warning(duration, maxEntries);
+        if (typeof warning == "function") {
+            if (this.props.stakingParams) {
+                let duration = this.props.stakingParams.unbonding_time;
+                let maxEntries = this.props.stakingParams.max_entries;
+                return warning(duration, maxEntries);
+            }
+        }
+        return null;
     }
 
     getConfirmationMessage = () => {
@@ -730,7 +738,7 @@ class DelegationButtons extends LedgerButton {
         let canUnbond = !delegation.unbonding || maxEntries > delegation.unbonding;
         return <span>
             <div id='redelegate-button' className={`disabled-btn-wrapper${isCompleted?'':' disabled'}`}>
-                <Button color="danger" size="sm" disabled={!isCompleted}
+                <Button color="warning" size="sm" disabled={!isCompleted}
                     onClick={() => this.openModal(Types.REDELEGATE)}>
                     {TypeMeta[Types.REDELEGATE].button}
                 </Button>
@@ -741,7 +749,7 @@ class DelegationButtons extends LedgerButton {
                 </UncontrolledTooltip>}
             </div>
             <div id='undelegate-button' className={`disabled-btn-wrapper${canUnbond?'':' disabled'}`}>
-                <Button color="warning" size="sm" disabled={!canUnbond}
+                <Button color="danger" size="sm" disabled={!canUnbond}
                     onClick={() => this.openModal(Types.UNDELEGATE)}>
                     {TypeMeta[Types.UNDELEGATE].button}
                 </Button>
@@ -906,7 +914,7 @@ class SubmitProposalButton extends LedgerButton {
             </InputGroup>
             <Input name="memo" onChange={this.handleInputChange}
                 placeholder="Memo(optional)" type="textarea" value={this.state.memo}/>
-            <div>your available balance: <Amount coin={maxAmount}/></div> 
+            <div>your available balance: <Amount coin={maxAmount}/></div>
         </TabPane>
     }
 
@@ -1081,7 +1089,7 @@ LedgerButton.propTypes = {
 
 DelegationButtons.propTypes = {
     validator: PropTypes.shape({
-        _id:PropTypes.shape({ 
+        _id:PropTypes.shape({
             _str: PropTypes.string
         }),
         address: PropTypes.string,

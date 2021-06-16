@@ -17,7 +17,8 @@ class LedgerModal extends React.Component {
             accountIndexStart: 0,
             accountIndexEnd: 10
         };
-        this.ledger = new Ledger({ testModeAllowed: false });
+        const CHAIN_ID = Meteor.settings.public.chainId;
+        this.ledger = new Ledger({testModeAllowed: CHAIN_ID.toLowerCase().indexOf( "mainnet" ) == -1});
     }
 
     autoOpenModal = () => {
@@ -192,8 +193,8 @@ class LedgerModal extends React.Component {
                                     {this.state.accountsList?.map((option, k) => (
                                         <div className={k > 0 ? "mb-2 pt-2 border-top ledger-address-list" : "mb-2 ledger-address-list"} key={k}><input type="radio" name="ledger-address-selection" className="ml-1 mr-1 mt-1" onChange={(e) => this.handleAddressSwitch(e, k, option.address.toLowerCase())} /> <span className="font-weight-bold mr-1">{`${k}.`}</span><span className="overflow-auto">{`${option.address.toLowerCase()}`} </span></div>
                                     ))}
-                                    <div className="text-center mt-3"> 
-                                        {this.state.accountIndexStart != 0 ? 
+                                    <div className="text-center mt-3">
+                                        {this.state.accountIndexStart != 0 ?
                                             <Button outline color="danger" size="md" onClick={this.loadPreviousAddresses} className="mr-4 text-capitalize"><T>common.back</T></Button> : null }
                                         {this.state.accountIndexEnd <= 99 ? <Button outline color="danger" size="md" onClick={this.loadNextAddresses} className="text-capitalize"><T>common.next</T></Button> : null }</div>
                                 </>}

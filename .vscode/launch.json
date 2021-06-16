@@ -1,0 +1,25 @@
+{
+   // Use IntelliSense to learn about possible attributes.
+   // Hover to view descriptions of existing attributes.
+   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+   "version": "0.2.0",
+   "configurations": [
+      {
+         // https://forums.meteor.com/t/vs-code-server-debugging-with-meteor-1-10/53437/16
+         // on macbook: meteor --settings settings-slim.json --exclude-archs web.browser.legacy,web.cordova --inspect-brk=0.0.0.0:9229 run
+         "name": "meteor@macbook",
+         "address": "macbook",
+         "port": 9229,
+         "request": "attach",
+         "skipFiles": [
+            "<node_internals>/**",
+            "${workspaceFolder}/node_modules/**/*.js",
+            "${workspaceFolder}/.meteor/**/*.js",
+            "/Users/dave/.meteor/packages/*/.*/**/*.js"
+          ],
+         "type": "node",
+         "restart": true
+      }
+   ]
+}
+

@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { Validators } from '/imports/api/validators/validators.js';
 const fetchFromUrl = (url) => {
+    let res;
     try{
         let res = HTTP.get(API + url);
         if (res.statusCode == 200){
@@ -101,7 +102,7 @@ Meteor.methods({
                 balance.rewards = JSON.parse(rewards.content).rewards;
                 //get total rewards value
                 balance.total_rewards= JSON.parse(rewards.content).total;
-                
+
             }
         }
         catch (e){
@@ -205,7 +206,7 @@ Meteor.methods({
         }
     },
     'accounts.getAllRedelegations'(address, validator){
-        this.unblock();        
+        this.unblock();
         let url = `/cosmos/staking/v1beta1/v1beta1/delegators/${address}/redelegations&src_validator_addr=${validator}`;
         try{
             let result = fetchFromUrl(url);
@@ -242,4 +243,4 @@ Meteor.methods({
             console.log(e.response.content);
         }
     },
-}) 
+})

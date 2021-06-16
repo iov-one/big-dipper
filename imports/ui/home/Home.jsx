@@ -1,4 +1,4 @@
-  
+
 import React, { Component } from 'react';
 import {Row, Col } from 'reactstrap';
 import ChainStatus from './ChainStatusContainer.js';
@@ -18,8 +18,8 @@ export default class Home extends Component{
     render() {
         return <div id="home">
             <Helmet>
-                <title>Big Dipper | Cosmos Explorer presented by Forbole</title>
-                <meta name="description" content="Cosmos is a decentralized network of independent parallel blockchains, each powered by BFT consensus algorithms like Tendermint consensus." />
+                <title>The Starname (IOV) Network</title>
+                <meta name="description" content="Eradicate digital asset addresses by using The Starname Network." />
             </Helmet>
             <ChainInfo/>
             <Consensus />

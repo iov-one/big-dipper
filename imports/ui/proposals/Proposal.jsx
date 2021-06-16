@@ -43,11 +43,11 @@ export default class Proposal extends Component{
             orderDir: -1,
             breakDownSelection: 'Bar',
             chartOptions : {
-                'Bar':'Bar', 
-                'All':'All', 
-                'Yes':'VOTE_OPTION_YES', 
-                'Abstain':'VOTE_OPTION_ABSTAIN', 
-                'No': 'VOTE_OPTION_NO', 
+                'Bar':'Bar',
+                'All':'All',
+                'Yes':'VOTE_OPTION_YES',
+                'Abstain':'VOTE_OPTION_ABSTAIN',
+                'No': 'VOTE_OPTION_NO',
                 'No With Veto':'VOTE_OPTION_NO_WITH_VETO'
             }
         }
@@ -164,7 +164,7 @@ export default class Proposal extends Component{
                     data: data.length == 0?emtpyData:data,
                     totalVotingPower: totalVotingPower,
                     maxVotingPower: maxVotingPower
-                })    
+                })
             }
         };
 
@@ -310,13 +310,13 @@ export default class Proposal extends Component{
                         {/* Community Pool Spend Proposal */}
                         {(this.props.proposal.content.type === 'cosmos-sdk/CommunityPoolSpendProposal')?<Row className="mb-2 border-top">
                             <Col md={3} className="label"><T>proposals.recipient</T></Col>
-                            <Col md={9} className="value"> <Account address={this.props.proposal.content.recipient}/></Col> 
+                            <Col md={9} className="value"> <Account address={this.props.proposal.content.recipient}/></Col>
                         </Row>:null}
                         {(this.props.proposal.content.type === 'cosmos-sdk/CommunityPoolSpendProposal')?<Row className="mb-2 border-top">
                             <Col md={3} className="label"><T>proposals.amount</T></Col>
                             <Col md={9} className="value"> {this.props.proposal.content.amount.map((amount, j) => {
                                 return <div key={j}>{new Coin(amount.amount, amount.denom).toString(6)}</div>
-                            })}</Col> 
+                            })}</Col>
                         </Row>:null}
                         <Row className="mb-2 border-top">
                             <Col md={3} className="label"><T>proposals.proposalType</T></Col>
@@ -409,7 +409,7 @@ export default class Proposal extends Component{
                                     <Col xs={12}><Card>
                                         <CardHeader>
                                             <Nav tabs className='card-header-tabs'>
-                                                {Object.keys(this.state.chartOptions).map(key => 
+                                                {Object.keys(this.state.chartOptions).map(key =>
                                                     <NavItem key={key}><NavLink className='no-select' active={this.state.breakDownSelection==this.state.chartOptions[key]}
                                                         onClick={() => this.setState({breakDownSelection: this.state.chartOptions[key]})}>
                                                         {key}

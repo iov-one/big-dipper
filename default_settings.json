@@ -1,6 +1,6 @@
 {
     "public":{
-        "chainName": "Cosmos",
+        "chainName": "Starname (IOV) Testnet",
         "chainId": "{Chain ID}",
         "gtm": "{Add your Google Tag Manager ID here}",
         "slashingWindow": 10000,
@@ -20,12 +20,12 @@
                 "denom": "uatom",
                 "displayName": "ATOM",
                 "fraction": 1000000
-            }, 
+            },
             {
                 "denom": "umuon",
                 "displayName": "MUON",
                 "fraction": 1000000
-            } 
+            }
         ],
         "ledger":{
             "coinType": 118,
@@ -66,5 +66,3 @@
         "delegationInterval": 900000
     }
 }
-
-

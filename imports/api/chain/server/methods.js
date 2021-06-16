@@ -70,7 +70,7 @@ Meteor.methods({
                 let response = HTTP.get(url);
                 result = JSON.parse(response.content).result;
                 validators = [...validators, ...result.validators];
-                
+
             }
             while (validators.length < parseInt(result.total))
 

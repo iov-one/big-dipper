@@ -18,7 +18,7 @@ Meteor.methods({
             // '1624DE6420' is ed25519 pubkey prefix
                 let pubkeyAminoPrefix = Buffer.from('1624DE6420', 'hex');
                 buffer = Buffer.alloc(37);
-        
+
                 pubkeyAminoPrefix.copy(buffer, 0)
                 Buffer.from(pubkey.value, 'base64').copy(buffer, pubkeyAminoPrefix.length)
             }
@@ -26,7 +26,7 @@ Meteor.methods({
             // 'EB5AE98721' is secp256k1 pubkey prefix
                 let pubkeyAminoPrefix = Buffer.from('EB5AE98721', 'hex');
                 buffer = Buffer.alloc(38);
-    
+
                 pubkeyAminoPrefix.copy(buffer, 0)
                 Buffer.from(pubkey.value, 'base64').copy(buffer, pubkeyAminoPrefix.length)
             }
@@ -50,7 +50,7 @@ Meteor.methods({
             // '1624DE6420' is ed25519 pubkey prefix
                 let pubkeyAminoPrefix = Buffer.from('1624DE6420', 'hex');
                 buffer = Buffer.alloc(37);
-        
+
                 pubkeyAminoPrefix.copy(buffer, 0)
                 Buffer.from(pubkey.key, 'base64').copy(buffer, pubkeyAminoPrefix.length)
             }
@@ -58,7 +58,7 @@ Meteor.methods({
             // 'EB5AE98721' is secp256k1 pubkey prefix
                 let pubkeyAminoPrefix = Buffer.from('EB5AE98721', 'hex');
                 buffer = Buffer.alloc(38);
-    
+
                 pubkeyAminoPrefix.copy(buffer, 0)
                 Buffer.from(pubkey.key, 'base64').copy(buffer, pubkeyAminoPrefix.length)
             }
@@ -93,7 +93,7 @@ Meteor.methods({
                 console.log("Pubkey type not supported.");
                 return false;
             }
-        
+
             return buffer.slice(pubkeyAminoPrefix.length).toString('base64');
         }
         catch (e){
