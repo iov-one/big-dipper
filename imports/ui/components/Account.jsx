@@ -35,7 +35,7 @@ export default class Account extends Component{
             });
         else
             this.setState({
-                address: `/validator/${address}`,
+                address: `/account/${address}`,
                 moniker: address,
                 validator: null
             });

@@ -6,6 +6,8 @@ import i18n from 'meteor/universe:i18n';
 import Coin from '/both/utils/coins.js'
 import ReactJson from 'react-json-view'
 import _ from 'lodash';
+import Starname from '../components/Starname.jsx';
+import Msg from '../components/Msg.jsx';
 
 const T = i18n.createComponent();
 
@@ -41,11 +43,12 @@ export default class Activites extends Component {
     render(){
         // console.log(this.props);
         const msg = this.props.msg;
+        const msgJson = encodeURIComponent( JSON.stringify( msg ) );
         const events = [];
         for (let i in this.props.events){
             events[this.props.events[i].type] = this.props.events[i].attributes
         }
-        
+
         switch (msg["@type"]){
         // bank
         case "/cosmos.bank.v1beta1.MsgSend":

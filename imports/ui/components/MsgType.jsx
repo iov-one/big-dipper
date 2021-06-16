@@ -11,7 +11,7 @@ export const MsgType = (props) => {
         return <Badge color="success"><T>messageTypes.send</T></Badge>
     case "/cosmos.bank.v1beta1.MsgMultiSend":
         return <Badge color="success"><T>messageTypes.multiSend</T></Badge>
-        
+
         // staking
     case "/cosmos.staking.v1beta1.MsgCreateValidator":
         return <Badge color="warning"><T>messageTypes.createValidator</T></Badge>;
@@ -23,7 +23,7 @@ export const MsgType = (props) => {
         return <Badge color="warning"><T>messageTypes.undelegate</T></Badge>;
     case "/cosmos.staking.v1beta1.MsgBeginRedelegate":
         return <Badge color="warning"><T>messageTypes.redelegate</T></Badge>;
-        
+
         // gov
     case "/cosmos.gov.v1beta1.MsgSubmitProposal":
         return <Badge color="info"><T>messageTypes.submitProposal</T></Badge>
@@ -31,7 +31,7 @@ export const MsgType = (props) => {
         return <Badge color="info"><T>messageTypes.deposit</T></Badge>
     case "/cosmos.gov.v1beta1.MsgVote":
         return <Badge color="info"><T>messageTypes.vote</T></Badge>;
-        
+
         // distribution
     case "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission":
         return <Badge color="secondary"><T>messageTypes.withdrawComission</T></Badge>;
@@ -43,7 +43,7 @@ export const MsgType = (props) => {
         // slashing
     case "/cosmos.slashing.v1beta1.MsgUnjail":
         return <Badge color="danger"><T>messageTypes.unjail</T></Badge>;
-        
+
         // ibc
     case "/cosmos.IBCTransferMsg":
         return <Badge color="dark"><T>messageTypes.IBCTransfer</T></Badge>;

@@ -49,8 +49,8 @@ Meteor.methods({
     'Validators.fetchKeybase'(address) {
         this.unblock();
         // fetching keybase every base on keybaseFetchingInterval settings
-        // default to every 5 hours 
-        
+        // default to every 5 hours
+
         let url = RPC + '/status';
         let chainId;
         try {
@@ -59,7 +59,7 @@ Meteor.methods({
             chainId = (status?.result?.node_info?.network);
         }
         catch (e) {
-            console.log("Error getting chainId for keybase fetching")        
+            console.log("Error getting chainId for keybase fetching")
         }
         let chainStatus = Chain.findOne({ chainId});
         const bulkValidators = Validators.rawCollection().initializeUnorderedBulkOp();
@@ -98,6 +98,6 @@ Meteor.methods({
             console.log("Error when updating lastKeybaseFetchTime")
         }
 
-    }    
+    }
 
 });

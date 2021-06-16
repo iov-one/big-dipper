@@ -15,10 +15,10 @@
 * [#522] Fixed validator commission tx with correct validator operator address when signing with Ledger.
 
 ## v0.41.x-13
-* [#484] Replaced delegation list displayed under validator page with total number of delegations. 
-* [#509] Added display list of addresses available for user to login with when connecting the Ledger.  
-* [#497] Fetch keybase with timer settings 
-* [#403] Unified token display to show stake denom with 6 decimal places (abandon displaying values in mint denom) and improved the txs by adding gas caluclations before broadcasting the tx to ensure the message will not fail due to insufficient funds to cover the fees. 
+* [#484] Replaced delegation list displayed under validator page with total number of delegations.
+* [#509] Added display list of addresses available for user to login with when connecting the Ledger.
+* [#497] Fetch keybase with timer settings
+* [#403] Unified token display to show stake denom with 6 decimal places (abandon displaying values in mint denom) and improved the txs by adding gas caluclations before broadcasting the tx to ensure the message will not fail due to insufficient funds to cover the fees.
 
 ## v0.41.x-12
 * [#387] Added Bluetooth Ledger support
@@ -58,6 +58,7 @@
 ## v0.39.x-6
 
 * Index transactions with timer settings
+<<<<<<< HEAD
 
 ## v0.39.x-5
 
@@ -81,6 +82,30 @@
 
 ## v0.39.x-3
 
+=======
+
+## v0.39.x-5
+
+* [#444] Fetch keybase in async function with query interval contolled by settings
+* Fix missing value in VP distribution
+
+## v0.39.x-4
+
+* [#436] Index transactions in a separate process
+* Update to Meteor 1.12
+* [#435] Show inflation as 0% if there is no inflation (no minting module integrated)
+* [#433] Create tx index for MsgCreateValidator
+* Use react-json-view instead of JSONPretty
+* Update uptime with signing info
+* [#280] Remove reading genesis file
+* Remove plural denom
+* Simplify validator storing
+* Get data and show proposal based on enabled modules
+* Calculate validator uptime in async
+
+## v0.39.x-3
+
+>>>>>>> master
 * [#431] Create correct index for trasaction events
 
 ## v0.39.x-2
@@ -109,7 +134,11 @@
 * [#284] Support Tendermint v0.33 block format
 * [#346] Changed "Governanza" typo to "Gobernanza" in Spanish Translation
 * [#375] Fixed the Commission Value Calculations that caused Account Page to break
-* [#372] Fixed Redelegation List showing on all account pages  
+<<<<<<< HEAD
+* [#372] Fixed Redelegation List showing on all account pages
+=======
+* [#372] Fixed Redelegation List showing on all account pages
+>>>>>>> master
 
 ## v0.37.x-patch-11
 
@@ -152,7 +181,7 @@
 * [#267] Fixed Fee Decimal Places
 * [#263] Fixed Tx fee to be displayed in Minting or Staking Denom depending on the fee amount
 * [#262] Fixed Validator Popover in Account Section
-* [#260] Fixed Token unit to display the correct Denom Name/Type  
+* [#260] Fixed Token unit to display the correct Denom Name/Type
 * [#227] Added additional info to be displayed for Parameter Change Proposal and Community Pool Spend Proposal
 * [#276] Added Coin Selection Dropdown in Account Section to support multiple denomination
 * [#289] Updated Coin Selection Dropdown to display the denom as the display (Staking) denom and only show when more than one type of Coin is available.

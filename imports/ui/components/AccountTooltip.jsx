@@ -83,14 +83,14 @@ export default class AccountTooltip extends Account{
                     {(isActive)?<CardText className="uptime data">
                         <i className="material-icons">flash_on</i><Progress value={validator.uptime} style={{width:'70%', display:'inline-block'}}>{validator.uptime?numbro(validator.uptime/100).format('0%'):0}
                         </Progress>
-                    </CardText>:null}            
+                    </CardText>:null}
                 </PopoverBody>
             </Card>
         </UncontrolledPopover>
     }
 
     render(){
-           
+
         return [
             <span ref={this.ref} key='link' className="validator-popover-row">
                 <Link to={this.state.address}><Avatar list moniker={this.state.moniker} profileUrl={this.state.validator?this.state.validator.profile_url:''} address={this.state.validator?this.state.validator.address:''} /> {this.state.moniker} </Link>
@@ -99,4 +99,3 @@ export default class AccountTooltip extends Account{
         ]
     }
 }
-
