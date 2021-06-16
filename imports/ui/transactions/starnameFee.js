@@ -1,5 +1,5 @@
 export default starnameFee = tx => {
-   return tx.logs && tx.logs.length ? tx.logs.reduce( ( fee, msg ) => {
+   return tx.tx_response && tx.tx_response.logs && tx.tx_response.logs.length ? tx.tx_response.logs.reduce( ( fee, msg ) => {
       const events = msg.events;
       if ( events[0].type == "message" && events[0].attributes.find( attribute => attribute.key == "module" && attribute.value == "starname" ) ) {
          if ( events[1].type == "transfer" ) {

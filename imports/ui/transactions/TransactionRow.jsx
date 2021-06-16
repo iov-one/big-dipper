@@ -11,6 +11,7 @@ import numbro from 'numbro';
 import Coin from '/both/utils/coins.js'
 import SentryBoundary from '../components/SentryBoundary.jsx';
 import { Markdown } from 'react-showdown';
+import starnameFee from './starnameFee.js';
 
 let showdown  = require('showdown');
 showdown.setFlavor('github');
@@ -34,7 +35,8 @@ export const TransactionRow = (props) => {
         {(!props.blockList) ? <Col xs={4} md={2} lg={!homepage ? 1 : 2}><i className="fas fa-database d-lg-none"></i> <Link to={"/blocks/"+tx.height}>{numbro(tx.height).format("0,0")}</Link></Col>:''}
         <Col xs={(!props.blockList)?2:4} md={1}>{(!tx.code)?<TxIcon valid />:<TxIcon />}</Col>
         {!homepage ? <Col xs={(!props.blockList)?6:8} md={(!props.blockList)?9:4} lg={2} className="fee"><i className="material-icons d-lg-none">monetization_on</i> {(tx?.tx?.auth_info?.fee?.amount.length > 0)?tx?.tx?.auth_info?.fee?.amount.map((fee,i) => {
-            return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount), (fee)?fee.denom:null)).toString(6)}</span>
+            return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount)+starnameFee(tx), (fee)?fee.denom:null)).toString(6)}</span>
+
         }) : <span>No fee</span>}</Col> : <Col xs={(!props.blockList) ? 6 : 8} md={(!props.blockList) ? 9 : 4} lg={2} className="fee d-sm-none"><i className="material-icons d-lg-none">monetization_on</i> {(tx?.tx?.auth_info?.fee?.amount.length > 0) ? tx?.tx?.auth_info?.fee?.amount.map((fee, i) => {
             return <span className="text-nowrap" key={i}>{(new Coin(parseFloat(fee.amount), (fee) ? fee.denom : null)).toString(6)}</span>
         }) : <span>No fee</span>}</Col> }
